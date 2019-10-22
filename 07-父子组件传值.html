@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <child :content="content"></child>
+</div>
+<script src="vue.js"></script>
+<script>
+  Vue.component('child', {
+    props: {
+      content: {
+        type: String,
+        validate: value => {
+          return value > 5
+        }
+      }
+    },
+    template: '<h1>{{content}}</h1>'
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      content: 4
+    }
+  })
+</script>
+</body>
+</html>

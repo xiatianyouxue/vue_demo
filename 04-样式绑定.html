@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div :class="{active:isActive}" @click="click">{{message}}</div>
+</div>
+<!--通过style来绑定样式-->
+<div id="app1">
+  <div :style="[styleObj,{cursor:'pointer'}]" @click="handleClick">我是app1的内容</div>
+</div>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      isActive: false,
+      message: 'hello world'
+    },
+    methods: {
+      click() {
+        this.isActive = !this.isActive
+      }
+    }
+  })
+</script>
+
+<script src="vue.js"></script>
+<script>
+  const app1 = new Vue({
+    el: '#app1',
+    data: {
+      message: '',
+      styleObj: {
+        color: 'red'
+      }
+    },
+    methods: {
+      handleClick() {
+        this.styleObj.color = this.styleObj.color === 'red' ? 'yellow' : 'red'
+      }
+    }
+  })
+</script>
+</body>
+</html>

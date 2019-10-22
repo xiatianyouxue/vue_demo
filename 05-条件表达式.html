@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="item in list" :key="item.id">{{item.text}}</li>
+  </ul>
+</div>
+<script src="vue.js"></script>
+<script>
+ app.$set(list, {id: 4, text: '香蕉'})
+  const app = new Vue({
+    el: '#app',
+    data: {
+      list: [
+        {id: 1, text: '苹果'},
+        {id: 2, text: '梨子'},
+        {id: 3, text: '火龙果'}
+      ]
+    }
+  })
+</script>
+</body>
+</html>

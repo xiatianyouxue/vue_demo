@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <body-content>
+    <!--    这个地方可以看成是插槽的坑-->
+    <!--    下面组件的地方有几个slot就显示多少次-->
+<!--    <div class="header" slot="header">header</div>-->
+    <div class="footer" slot="footer">footer</div>
+  </body-content>
+</div>
+<script src="vue.js"></script>
+<script>
+  Vue.component('body-content', {
+    template: `<h2>
+                <slot name="header">
+                 <h3>default slot</h3>
+                </slot>
+                content
+                <slot name="footer"></slot>
+                </h2>`
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: ''
+    }
+  })
+</script>
+</body>
+</html>

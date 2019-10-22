@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <child content="dell"></child>
+  <child content="lee"></child>
+</div>
+<script src="vue.js"></script>
+<script>
+  //通过bus总线的形式来实现非父组件传递数据
+  Vue.prototype.bus = new Vue()
+  //需求:点击dell时 里面显示的内容变成lee,当点击lee时,里面显示的内容变成dell
+  Vue.component('child', {
+    props: ['content'],
+    data() {
+      return {
+        selfContent: this.content
+      }
+    },
+    template: '<h2 @click="handleClick">{{selfContent}}</h2>',
+    methods: {
+      handleClick() {
+        // alert(this.content)
+        this.bus.$emit('change', this.selfContent)
+      }
+    },
+    mounted() {
+      let _this = this
+      this.bus.$on('change', function (msg) {
+        _this.selfContent = msg
+
+      })
+    }
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: ''
+    },
+
+  })
+</script>
+</body>
+</html>

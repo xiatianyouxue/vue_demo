@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <counter @change="handleChange" ref="one"></counter>
+  <counter @change="handleChange" ref="two"></counter>
+  <h2>{{total}}</h2>
+</div>
+<script src="vue.js"></script>
+<script>
+  //先定义一个自组件
+  //自组件往父组件传值方法,通过this.$emit方法
+  Vue.component('counter', {
+    template: "<h2 @click='handleClick'>{{number}}</h2>",
+    data() {
+      return {
+        number: 0
+      }
+    },
+    methods: {
+      handleClick() {
+        this.number++
+        this.$emit('change')
+      }
+    }
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '',
+      total: ''
+    },
+    methods: {
+      handleChange() {
+        //通过this.$refs方法可以拿到组件和DOM元素
+        // console.log(this.$refs.one)
+        // console.log(this.$refs.two)
+        this.total = this.$refs.one.number + this.$refs.two.number
+      }
+    }
+  })
+</script>
+</body>
+</html>

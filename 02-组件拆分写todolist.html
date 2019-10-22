@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <label>
+    <input type="text" v-model="inputValue">
+  </label>
+  <button @click="handleClick">添加</button>
+  <ul>
+    <todo-list v-for="item in list" v-bind:content="item">{{item}}</todo-list>
+  </ul>
+</div>
+<script src="vue.js"></script>
+<script>
+  //注册全局组件
+  Vue.component('TodoList', {
+    props: ['content'],
+    template: '<li>{{content}}</li>'
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      inputValue: '',
+      list: []
+    },
+    methods: {
+      handleClick() {
+        
+        this.list.push(this.inputValue)
+        this.inputValue = ''
+      }
+    }
+  })
+</script>
+</body>
+</html>
