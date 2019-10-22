@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    button {
+      position: fixed;
+      top: 100px;
+      left: 0;
+    }
+    
+    .v-enter {
+      opacity: 0;
+    }
+    
+    .v-enter-active {
+      transition: opacity 2s;
+    }
+    
+    .v-leave-to {
+      opacity: 0;
+    }
+    .v-leave-active{
+      transition: opacity 3s;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <transition>
+    <child v-if="show"></child>
+  </transition>
+  <button @click="handleChange">切换</button>
+</div>
+<script src="vue.js"></script>
+<script>
+  Vue.component('child', {
+    template: '<h1>hello animate</h1>'
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      show: true
+    },
+    methods: {
+      handleChange() {
+        this.show = !this.show
+      }
+    }
+  })
+</script>
+</body>
+</html>
